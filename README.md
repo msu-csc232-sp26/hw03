@@ -1,22 +1,34 @@
-# LHWn - Title
+# HW03 - An Exploration of Dynamic Programming
 
-_A quick blurb or sub-title text_
+*A practical tour from recursion to memoization, tabulation, and beyond.*
 
 ## Background
 
-Before proceeding with this lab, the student should take the time to read
+Before proceeding with this lab, the student should take the time to read:
 
-* this
-* that
-* and the other thing
+* A quick review of the Fibonacci recurrence and mathematical induction.
+* An overview of **Dynamic Programming** (DP): overlapping subproblems & optimal substructure. (See the
+  article [Simplifying Dynamic Programming](sdp.pdf))
+* A short read
+  on [Gang of Four (GoF) Design Patterns](https://www.geeksforgeeks.org/system-design/gang-of-four-gof-design-patterns/),
+  and in particular, the
+    * **[GoF Strategy Pattern](https://www.geeksforgeeks.org/system-design/strategy-pattern-set-1/)**
+      and why decoupling algorithms from clients improves design
+    * **[GoF Abstract Factory Pattern](https://www.geeksforgeeks.org/system-design/abstract-factory-pattern/)**  and how
+      it is useful when a system needs flexibility in creating related objects without tightly coupling to
+      specific classes.
 
 ## Objective
 
-Upon successful completion of this lab, the student has learned how to
+Upon successful completion of this assignment, the student has learned how to
 
-* do this
-* do that
-* do another thing
+* Implement Fibonacci with multiple strategies: naïve recursion, top-down (memoization), bottom-up (tabulation),
+  iterative O(1), and fast doubling (O(log n)).
+* Compare time/space trade-offs across DP techniques and justify their use.
+* Encapsulate algorithms behind a **GoF Strategy** interface for clean substitution at runtime.
+* Write C++ that passes **clang-tidy** bounds-safety guidance (prefer `.at()` over `operator[]`).
+* Handle edge cases robustly (invalid input and 64-bit overflow beyond `F(92)`).
+* Validate correctness with **GoogleTest** unit tests.
 
 ## Getting Started
 
@@ -33,38 +45,73 @@ assignment.
 
 This assignment consists of the following tasks:
 
-* Task 1: <TODO: Declare me!>
-* Task 2: <TODO: Declare me!>
-* Task 3: <TODO: Declare me!>
-* Task 4: <TODO: Declare me - or erase me!>
-* Task 5: <TODO: Declare me - or erase me!>
+* Task 1: Implement a naive strategy
+* Task 2: Implement a top-down strategy (memoization)
+* Task 3: Implement a bottom-up strategy (tabulation)
+* Task 4: Implement an iterative strategy (O(1))
+* Task 5: Implement a fast doubling strategy (O(log n))
 
-Pol, neuter abactor!
+Some motivational line to get them excited about the assignment.
 
-### Task 1: <TODO: Declare me!>
+### Task 1: Implement a naive strategy
 
 Enumerated below are the essential steps to completing this task. For a deeper dive before you begin, see
 the [Task 1 Details](task1.md) document.
 
-### Task 2: <TODO: Declare me!>
+1. Navigate to the [include/csc232.h](include/csc232.h) header file and toggle the `TEST_TASK1` macro definition from
+   `FALSE` to `TRUE` and erase the corresponding `TODO` comment.
+2. Open the [src/main/cpp/naive_strategy.cpp](src/main/cpp/naive_strategy.cpp) source file and implement the `compute`
+   method accordingly.
+3. Use the `unit_tests` target to verify your solution.
+4. When you are happy with the results of your verification, stage, commit, and push your changes to GitHub.
+
+### Task 2: Implement a top-down strategy (memoization)
 
 Enumerated below are the essential steps to completing this task. For a deeper dive before you begin, see
 the [Task 2 Details](task2.md) document.
 
-### Task 3: <TODO: Declare me!>
+1. Navigate to the [include/csc232.h](include/csc232.h) header file and toggle the `TEST_TASK2` macro definition from
+   `FALSE` to `TRUE` and erase the corresponding `TODO` comment.
+2. Open the [src/main/cpp/top_down_memo_strategy.cpp](src/main/cpp/top_down_memo_strategy.cpp) source file and implement
+   the `compute` method accordingly.
+3. Use the `unit_tests` target to verify your solution.
+4. When you are happy with the results of your verification, stage, commit, and push your changes to GitHub.
+
+### Task 3: Implement a bottom-up strategy (tabulation)
 
 Enumerated below are the essential steps to completing this task. For a deeper dive before you begin, see
 the [Task 3 Details](task3.md) document.
 
-### Task 4: <TODO: Declare me!>
+1. Navigate to the [include/csc232.h](include/csc232.h) header file and toggle the `TEST_TASK3` macro definition from
+   `FALSE` to `TRUE` and erase the corresponding `TODO` comment.
+2. Open the [src/main/cpp/bottom_up_tabulation_strategy.cpp](src/main/cpp/bottom_up_tabulation_strategy.cpp) source file
+   and implement the `compute` method accordingly.
+3. Use the `unit_tests` target to verify your solution.
+4. When you are happy with the results of your verification, stage, commit, and push your changes to GitHub.
+
+### Task 4: Implement an iterative strategy (O(1))
 
 Enumerated below are the essential steps to completing this task. For a deeper dive before you begin, see
 the [Task 4 Details](task4.md) document.
 
-### Task 5: <TODO: Declare me!>
+1. Navigate to the [include/csc232.h](include/csc232.h) header file and toggle the `TEST_TASK4` macro definition from
+   `FALSE` to `TRUE` and erase the corresponding `TODO` comment.
+2. Open the [src/main/cpp/iterative_strategy.cpp](src/main/cpp/iterative_strategy.cpp) source file and implement the
+   `compute` method accordingly.
+3. Use the `unit_tests` target to verify your solution.
+4. When you are happy with the results of your verification, stage, commit, and push your changes to GitHub.
+
+### Task 5: Implement a fast doubling strategy (O(log n))
 
 Enumerated below are the essential steps to completing this task. For a deeper dive before you begin, see
 the [Task 5 Details](task5.md) document.
+
+1. Navigate to the [include/csc232.h](include/csc232.h) header file and toggle the `TEST_TASK5` macro definition from
+   `FALSE` to `TRUE` and erase the corresponding `TODO` comment.
+2. Open the [src/main/cpp/fast_doubling_strategy.cpp](src/main/cpp/fast_doubling_strategy.cpp) source file and implement
+   the `compute` method accordingly.
+3. Use the `unit_tests` target to verify your solution.
+4. When you are happy with the results of your verification, stage, commit, and push your changes to GitHub.
 
 ## Submission Details
 
@@ -100,11 +147,11 @@ be granted for this oversight**.
 
 ### Due Date
 
-Your assignment submission is due by ...
+Your assignment submission is due by 23:59 Monday 02-March-2026.
 
 ### Grading Rubric
 
-This assignment is worth **3|5 points**.
+This assignment is worth **5 points**.
 
 | Criteria           | Exceeds Expectations         | Meets Expectations                  | Below Expectations                  | Failure                                        |
 |--------------------|------------------------------|-------------------------------------|-------------------------------------|------------------------------------------------|
