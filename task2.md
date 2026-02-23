@@ -1,4 +1,4 @@
-# Task 2 Deep Dive — Top-Down Strategy (Memoization)
+# Deep Dive: Task 2 Deep Dive — Top-Down Strategy (Memoization)
 
 ## Concept
 **Memoization** caches results of recursive calls to avoid recomputation. This transforms the exponential naïve recursion into linear time.

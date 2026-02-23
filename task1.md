@@ -1,4 +1,4 @@
-# Task 1 Deep Dive — Naïve Recursive Strategy
+# Deep Dive: Task 1 Deep Dive — Naïve Recursive Strategy
 
 ## Concept
 The naïve recursive Fibonacci directly follows the mathematical recurrence:

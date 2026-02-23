@@ -1,4 +1,4 @@
-# Task 3 Deep Dive — Bottom-Up Strategy (Tabulation)
+# Deep Dive: Task 3 Deep Dive — Bottom-Up Strategy (Tabulation)
 
 ## Concept
 **Tabulation** builds solutions from the ground up. Start from base cases and iteratively fill a table until you reach `F(n)`.

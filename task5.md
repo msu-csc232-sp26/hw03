@@ -1,4 +1,4 @@
-# Task 5 Deep Dive — Fast Doubling Strategy (O(log n))
+# Deep Dive: Task 5 — Fast Doubling Strategy (O(log n))
 
 ## Concept
 
