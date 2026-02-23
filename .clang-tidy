@@ -1,4 +1,17 @@
-Checks: '-*,bugprone-*,-bugprone-suspicious-include,clang-analyzer-*,cppcoreguidelines-*,-cppcoreguidelines-special-member-functions,-cppcoreguidelines-avoid-c-arrays,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,-cppcoreguidelines-owning-memory,-cppcoreguidelines-pro-bounds-pointer-arithmetic,modernize-*,-modernize-avoid-c-arrays,readability-*'
+Checks: >
+  -*,bugprone-*,-bugprone-suspicious-include,
+  clang-analyzer-*,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-special-member-functions,
+  -cppcoreguidelines-avoid-c-arrays,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  modernize-*,-modernize-avoid-c-arrays,
+  readability-*
+WarningsAsErrors: '' # Suggest turning on in CI only
+HeaderFilterRegex: '^(include|src|examples|tests)/'
+FormatStyle: none
 CheckOptions:
   - key: cppcoreguidelines-macro-usage.CheckCapsOnly
     value: true

@@ -1,9 +1,7 @@
-/** CSC232 - Data Structures
- * Missouri State University, Spring 2026
- *
+/**
  * @file    expanded_templates.cpp
- * @author  Jim Daehn <jdaehn@missouristate.edu>
  * @brief   Template class expansions.
+ *
  * @details Expanded templates provide the means to organizing template class declarations
  *          and definitions into separate header and source files like any other class, but
  *          without having to #include the source file in the header file itself. If we
@@ -28,10 +26,13 @@
  * set(SRC_MAIN_FILES src/main/cpp/main.cpp src/main/cpp/expanded_templates.cpp)
  * @endcode
  * @see     The Weiss textbook, Appendix A Separate Compilation of Class Templates
+ *
+ * @author  James R. Daehn <jdaehn@missouristate.edu>
  * @version 1.0.0
  * @date    5/29/25
  *
- * @copyright Copyright (c) 2026 James R. Daehn. All rights reserved.
+ * @copyright Copyright (c) 2026
+ *            James R. Daehn. All rights reserved.
  */
 
 // #include "csc232.h" // usually used to conditional declare based on current task

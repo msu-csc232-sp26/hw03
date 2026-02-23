@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(IS_HW FALSE)
 
-project(lab-or-hw)
+project(hw03)
 
 if (CMAKE_VERSION GREATER_EQUAL "3.24.0")
     cmake_policy(SET CMP0135 NEW)
@@ -13,12 +13,35 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Source sets for targets
 set(SRC_MAIN_FILES src/main/cpp/main.cpp
-        src/main/cpp/expanded_templates.cpp)
+        src/main/cpp/strategy_factory.cpp
+        src/main/cpp/naive_strategy.cpp
+        src/main/cpp/top_down_memo_strategy.cpp
+        src/main/cpp/bottom_up_tabulation_strategy.cpp
+        src/main/cpp/iterative_strategy.cpp
+        src/main/cpp/fibonacci_calculator.cpp
+        src/main/cpp/calculator_factory.cpp
+        src/main/cpp/fast_doubling_strategy.cpp
+)
 set(SRC_DEMO_FILES src/main/cpp/demo.cpp
-        src/main/cpp/expanded_templates.cpp
+        src/main/cpp/strategy_factory.cpp
+        src/main/cpp/naive_strategy.cpp
+        src/main/cpp/top_down_memo_strategy.cpp
+        src/main/cpp/bottom_up_tabulation_strategy.cpp
+        src/main/cpp/iterative_strategy.cpp
+        src/main/cpp/fibonacci_calculator.cpp
+        src/main/cpp/calculator_factory.cpp
+        src/main/cpp/fast_doubling_strategy.cpp
 )
 set(SRC_UNIT_TESTS src/test/cpp/unit_tests.cpp
-        src/main/cpp/expanded_templates.cpp)
+        src/main/cpp/strategy_factory.cpp
+        src/main/cpp/naive_strategy.cpp
+        src/main/cpp/top_down_memo_strategy.cpp
+        src/main/cpp/bottom_up_tabulation_strategy.cpp
+        src/main/cpp/iterative_strategy.cpp
+        src/main/cpp/fibonacci_calculator.cpp
+        src/main/cpp/calculator_factory.cpp
+        src/main/cpp/fast_doubling_strategy.cpp
+)
 
 add_executable(main ${SRC_MAIN_FILES})
 add_executable(demo ${SRC_DEMO_FILES})

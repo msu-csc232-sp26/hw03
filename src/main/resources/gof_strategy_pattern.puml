@@ -1,0 +1,72 @@
+@startuml
+title GoF Strategy Pattern — Class & Sequence Diagrams
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+
+' ==========================================================
+'                   CLASS DIAGRAM (GoF Strategy)
+' ==========================================================
+package "Strategy Pattern (Class Diagram)" as STRAT_CLD {
+
+    interface Strategy <<interface>> {
+        + algorithmInterface(ctxState : ContextState) : Result
+    }
+
+    class ConcreteStrategyA <<strategy>> {
+        + algorithmInterface(ctxState : ContextState) : Result
+    }
+
+    class ConcreteStrategyB <<strategy>> {
+        + algorithmInterface(ctxState : ContextState) : Result
+    }
+
+    class Context <<context>> {
+        - strategy : Strategy
+        - state : ContextState
+        --
+        + Context(s : Strategy)
+        + setStrategy(s : Strategy) : void
+        + doWork() : Result
+    }
+
+    class ContextState {
+        + data : Map<String, Any>
+    }
+
+    class Result {
+        + ok : Boolean
+        + payload : Any
+        + errorMessage : String
+    }
+
+    ' --- Relationships ---
+    Strategy <|.. ConcreteStrategyA
+    Strategy <|.. ConcreteStrategyB
+
+    Context o-- Strategy : «has»
+    Context *-- ContextState : «owns»
+    Context ..> Result
+
+    ' --- Notes (GoF essence) ---
+    note right of Strategy
+      «Strategy»
+      Defines the interface for a family of algorithms.
+      Clients use the same interface, while implementations vary.
+    end note
+
+    note right of Context
+      «Context»
+      Maintains a reference to a Strategy object and may pass
+      context-specific state into algorithmInterface(...).
+      Delegates algorithmic work to the Strategy.
+    end note
+
+    note right of ConcreteStrategyA
+      «ConcreteStrategy»
+      Implements a variant of the algorithm via Strategy interface.
+    end note
+}
+@enduml

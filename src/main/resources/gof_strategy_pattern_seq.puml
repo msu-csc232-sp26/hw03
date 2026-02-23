@@ -1,0 +1,46 @@
+@startuml
+' ==========================================================
+'                   SEQUENCE DIAGRAM (Runtime)
+' ==========================================================
+newpage
+
+' You can render both diagrams from one file.
+' The sequence shows how Context delegates to Strategy at runtime.
+title GoF Strategy Pattern — Runtime Collaboration (Sequence)
+
+actor Client
+
+participant Context
+participant Strategy
+participant ConcreteStrategyA as CSA
+participant Result
+
+Client -> Context : new Context(strategy = CSA)
+Client -> Context : setStrategy(CSA)    ' optional if not set in ctor
+Client -> Context : doWork()
+activate Context
+
+Context -> Strategy : algorithmInterface(ctxState)
+activate Strategy
+
+' In practice, the interface call dispatches to the concrete impl (CSA)
+Strategy -> CSA : algorithmInterface(ctxState)
+activate CSA
+
+CSA --> Strategy : Result
+deactivate CSA
+
+Strategy --> Context : Result
+deactivate Strategy
+
+Context --> Client : Result
+deactivate Context
+
+note right of Client
+  Client selects the desired strategy
+  (e.g., from config/CLI/DI) and invokes
+  Context::doWork(). Context remains
+  decoupled from concrete algorithms.
+end note
+
+@enduml

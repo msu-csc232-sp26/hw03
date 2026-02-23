@@ -17,12 +17,12 @@ BraceWrapping:
   SplitEmptyNamespace: true
   SplitEmptyFunction: true
 IndentCaseLabels: false
-ColumnLimit: 0
+ColumnLimit: 120
 AccessModifierOffset: -4
 NamespaceIndentation: All
 FixNamespaceComments: false
 SpacesInSquareBrackets: true
-SpacesInAngles: true
+SpacesInAngles: false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: true
 SpaceInEmptyBlock: true
@@ -37,3 +37,4 @@ AlignTrailingComments:
   Kind: Always
   OverEmptyLines: 1
 MaxEmptyLinesToKeep: 1
+ReflowComments: IndentOnly          # (optional) helps wrap comment text

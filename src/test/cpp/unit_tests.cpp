@@ -13,12 +13,34 @@
 
 // unit_tests.cpp
 #include "base_test_fixture.h"
+#include "bottom_up_tabulation_strategy.h"
 #include "csc232.h"
+#include "fast_doubling_strategy.h"
+#include "fibonacci_strategy.h"
+#include "iterative_strategy.h"
+#include "naive_strategy.h"
+#include "top_down_memo_strategy.h"
 #include "gtest/gtest.h"
 #include <iomanip>
 #include <iostream>
 #include <string>
 #include <type_traits>
+
+// Helper to run basic correctness checks for any strategy
+void basic_checks( csc232::hw03::fibonacci_strategy &strategy, const bool allow_large = true ) // NOLINT
+{
+    EXPECT_EQ( strategy.compute( 0 ), 0 );
+    EXPECT_EQ( strategy.compute( 1 ), 1 );
+    EXPECT_EQ( strategy.compute( 2 ), 1 );
+    EXPECT_EQ( strategy.compute( 5 ), 5 );
+    EXPECT_EQ( strategy.compute( 10 ), 55 );
+    EXPECT_EQ( strategy.compute( 20 ), 6765 );
+    if ( allow_large )
+    {
+        // Still reasonably fast for all but naïve recursion
+        EXPECT_EQ( strategy.compute( 50 ), 12586269025LL );
+    }
+}
 
 // -----------------------------------------------------------------------------
 // Task 1 Fixture and Tests
@@ -38,10 +60,36 @@ protected:
     }
 };
 
-TEST_F( Task1TestFixture, RewriteThisTest )
+TEST_F( Task1TestFixture, ItHandlesSmallInputs )
 {
-    std::cout << "Task 1 is ready for evaluation, but this isn't going to validate anything.\n";
-    SUCCEED( );
+    csc232::hw03::naive_strategy strategy;
+    basic_checks( strategy, false ); // avoid F(50) for naïve
+}
+
+TEST_F( Task1TestFixture, ItThrowsOnNegative ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::naive_strategy strategy;
+            if ( strategy.compute( -1 ) )
+            {
+                std::cerr << "An invalid argument exception should have been thrown\n";
+            }
+        },
+        std::invalid_argument );
+}
+
+TEST_F( Task1TestFixture, ItThrowsOnOverflow ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::naive_strategy strategy;
+            if ( strategy.compute( 93 ) )
+            {
+                std::cerr << "An overflow exception should have been thrown\n";
+            }
+        },
+        std::overflow_error );
 }
 
 #else
@@ -63,11 +111,37 @@ protected:
     void TearDown( ) override { }
 };
 
-// --- Replace these with your real Task 2 unit tests ---
-TEST_F( Task2TestFixture, RewriteThisTest )
+TEST_F( Task2TestFixture, ItHandlesSmallInputs )
 {
-    std::cout << "Task 2 is ready for evaluation, but this isn't going to validate anything.\n";
-    SUCCEED( );
+    csc232::hw03::top_down_memo_strategy strategy;
+    basic_checks( strategy, true );
+}
+
+TEST_F( Task2TestFixture, ItThrowsOnNegative ) // NOLINT
+{
+
+    EXPECT_THROW(
+        {
+            const csc232::hw03::top_down_memo_strategy strategy;
+            if ( strategy.compute( -1 ) )
+            {
+                std::cerr << "An invalid argument exception should have been thrown\n";
+            }
+        },
+        std::invalid_argument );
+}
+
+TEST_F( Task2TestFixture, ItThrowsOnOverflow ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::top_down_memo_strategy strategy;
+            if ( strategy.compute( 93 ) )
+            {
+                std::cerr << "An overflow exception should have been thrown\n";
+            }
+        },
+        std::overflow_error );
 }
 #else
 TEST( Task2Primer, ItIsNotReady )
@@ -88,12 +162,36 @@ protected:
     void TearDown( ) override { }
 };
 
-// --- Replace these with your real Task 3 unit tests ---
-
-TEST_F( Task3TestFixture, RewriteThisTest )
+TEST_F( Task3TestFixture, ItHandlesSmallInputs )
 {
-    std::cout << "Task 3 is ready for evaluation, but this isn't going to validate anything.\n";
-    SUCCEED( );
+    csc232::hw03::bottom_up_tabulation_strategy strategy;
+    basic_checks( strategy, true );
+}
+
+TEST_F( Task3TestFixture, ItThrowsOnNegative ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::bottom_up_tabulation_strategy strategy;
+            if ( strategy.compute( -1 ) )
+            {
+                std::cerr << "An invalid argument exception should have been thrown\n";
+            }
+        },
+        std::invalid_argument );
+}
+
+TEST_F( Task3TestFixture, ItThrowsOnOverflow ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::bottom_up_tabulation_strategy strategy;
+            if ( strategy.compute( 93 ) )
+            {
+                std::cerr << "An overflow exception should have been thrown\n";
+            }
+        },
+        std::overflow_error );
 }
 #else
 TEST( Task3Primer, ItIsNotReady )
@@ -114,12 +212,36 @@ protected:
     void TearDown( ) override { }
 };
 
-// --- Replace these with your real Task 3 unit tests ---
-
-TEST_F( Task4TestFixture, RewriteThisTest )
+TEST_F( Task4TestFixture, ItHandlesSmallInputs )
 {
-    std::cout << "Task 4 is ready for evaluation, but this isn't going to validate anything.\n";
-    SUCCEED( );
+    csc232::hw03::iterative_strategy strategy;
+    basic_checks( strategy, true );
+}
+
+TEST_F( Task4TestFixture, ItThrowsOnNegative ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::iterative_strategy strategy;
+            if ( strategy.compute( -1 ) )
+            {
+                std::cerr << "An invalid argument exception should have been thrown\n";
+            }
+        },
+        std::invalid_argument );
+}
+
+TEST_F( Task4TestFixture, ItThrowsOnOverflow ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::iterative_strategy strategy;
+            if ( strategy.compute( 93 ) )
+            {
+                std::cerr << "An overflow exception should have been thrown\n";
+            }
+        },
+        std::overflow_error );
 }
 #else
 TEST( Task4Primer, ItIsNotReady )
@@ -140,13 +262,38 @@ protected:
     void TearDown( ) override { }
 };
 
-// --- Replace these with your real Task 3 unit tests ---
-
-TEST_F( Task5TestFixture, RewriteThisTest )
+TEST_F( Task5TestFixture, ItHandlesSmallInputs )
 {
-    std::cout << "Task 5 is ready for evaluation, but this isn't going to validate anything.\n";
-    SUCCEED( );
+    csc232::hw03::fast_doubling_strategy strategy;
+    basic_checks( strategy, true );
 }
+
+TEST_F( Task5TestFixture, ItThrowsOnNegative ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::fast_doubling_strategy strategy;
+            if ( strategy.compute( -1 ) )
+            {
+                std::cerr << "An invalid argument exception should have been thrown\n";
+            }
+        },
+        std::invalid_argument );
+}
+
+TEST_F( Task5TestFixture, ItThrowsOnOverflow ) // NOLINT
+{
+    EXPECT_THROW(
+        {
+            const csc232::hw03::fast_doubling_strategy strategy;
+            if ( strategy.compute( 93 ) )
+            {
+                std::cerr << "An overflow exception should have been thrown\n";
+            }
+        },
+        std::overflow_error );
+}
+
 #else
 TEST( Task5Primer, ItIsNotReady )
 {
@@ -176,7 +323,7 @@ static void PrintPerTaskSummaryAndScore( )
     const UnitTest *unitTest = UnitTest::GetInstance( );
 
     // Aggregate per suite (fixture) results
-    std::vector< SuiteSummary > summaries;
+    std::vector<SuiteSummary> summaries;
     int overall_passed = 0;
     int overall_failed = 0;
 
@@ -200,19 +347,16 @@ static void PrintPerTaskSummaryAndScore( )
     }
 
     const int overall_executed = overall_passed + overall_failed;
-    const double overall_percent = ( overall_executed > 0 )
-                                       ? ( 100.0 * static_cast< double >( overall_passed ) / overall_executed )
-                                       : 0.0;
+    const double overall_percent =
+        ( overall_executed > 0 ) ? ( 100.0 * static_cast<double>( overall_passed ) / overall_executed ) : 0.0;
 
     // Pretty print
     std::cout << "\n========== Assignment Task Results ==========\n";
     for ( const auto &suiteSummary : summaries )
     {
         // Recommend naming fixtures exactly "Task1", "Task2", "Task3"
-        if ( suiteSummary.name == "Task1TestFixture" ||
-             suiteSummary.name == "Task2TestFixture" ||
-             suiteSummary.name == "Task3TestFixture" ||
-             suiteSummary.name == "Task4TestFixture" ||
+        if ( suiteSummary.name == "Task1TestFixture" || suiteSummary.name == "Task2TestFixture" ||
+             suiteSummary.name == "Task3TestFixture" || suiteSummary.name == "Task4TestFixture" ||
              suiteSummary.name == "Task5TestFixture" )
         {
             std::cout << "Task: " << suiteSummary.name << "\n"
@@ -220,8 +364,8 @@ static void PrintPerTaskSummaryAndScore( )
                       << "  Failing: " << suiteSummary.failed << "\n"
                       << "  Disabled: " << suiteSummary.disabled << "\n"
                       << "  Total (compiled): " << suiteSummary.total << "\n"
-                      << "  Score (% passing among executed): "
-                      << std::fixed << std::setprecision( 1 ) << suiteSummary.percent << "%\n\n";
+                      << "  Score (% passing among executed): " << std::fixed << std::setprecision( 1 )
+                      << suiteSummary.percent << "%\n\n";
         }
     }
 
@@ -229,8 +373,7 @@ static void PrintPerTaskSummaryAndScore( )
               << "Passing: " << overall_passed << "\n"
               << "Failing: " << overall_failed << "\n"
               << "Executed: " << overall_executed << "\n"
-              << "Overall Score: " << std::fixed << std::setprecision( 1 )
-              << overall_percent << "%\n"
+              << "Overall Score: " << std::fixed << std::setprecision( 1 ) << overall_percent << "%\n"
               << "=============================================\n\n";
 }
 

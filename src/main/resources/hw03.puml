@@ -1,0 +1,160 @@
+@startuml
+title Fibonacci Strategies — GoF Strategy Pattern with Factories (Class Diagram)
+
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+'===================== Packages =====================
+package "API / Interfaces" as API {
+    interface fibonacci_strategy {
+        + long long compute(int n)
+    }
+}
+
+package "Concrete Strategies" as STRATS {
+    class naive_strategy {
+        + long long compute(int n)
+    }
+    class top_down_memo_strategy {
+        + long long compute(int n)
+        --
+        - long long impl(int n, std::vector<long long>& memo)
+    }
+    class bottom_up_tabulation_strategy {
+        + long long compute(int n)
+    }
+    class iterative_o1_strategy {
+        + long long compute(int n)
+    }
+    class fast_doubling_strategy {
+        + long long compute(int n)
+        --
+        - std::pair<long long,long long> fibPair(long long n)
+    }
+}
+
+package "Context" as CTX {
+    class fibonacci {
+        - std::unique_ptr<fibonacci_strategy> strategy_
+        --
+        + fibonacci(std::unique_ptr<fibonacci_strategy> strategy)
+        + void setStrategy(std::unique_ptr<fibonacci_strategy> strategy)
+        + long long compute(int n)
+    }
+}
+
+package "Factories" as FACT {
+    class StrategyFactory {
+        {static} + std::unique_ptr<fibonacci_strategy> make_strategy(const std::string& key)
+    }
+
+    class ContextFactory {
+        {static} + fibonacci make_fibonacci(const std::string& key)
+    }
+}
+
+package "Client / App" as CLIENT {
+    class Client {
+        + int run(int argc, char** argv)
+        --
+        - std::string selectKeyFromCLI(int argc, char** argv)
+    }
+}
+
+'===================== Relationships =====================
+
+' Interface implementation
+fibonacci_strategy <|.. naive_strategy
+fibonacci_strategy <|.. top_down_memo_strategy
+fibonacci_strategy <|.. bottom_up_tabulation_strategy
+fibonacci_strategy <|.. iterative_o1_strategy
+fibonacci_strategy <|.. fast_doubling_strategy
+
+' Context holds a strategy (composition by ownership semantics)
+fibonacci *-- fibonacci_strategy : «owns» strategy_
+
+' Strategy factory creates strategies
+StrategyFactory ..> fibonacci_strategy : creates\n(make_strategy)
+
+' Context factory creates fully-wired contexts
+ContextFactory ..> StrategyFactory : uses
+ContextFactory ..> fibonacci : creates\n(make_fibonacci)
+
+' Client depends on factories / context
+Client ..> ContextFactory : requests\nconfigured context
+Client ..> StrategyFactory : (optional) direct strategy creation
+Client ..> fibonacci : uses to compute
+
+'===================== Stereotypes & Notes =====================
+
+' Stereotypes to emphasize pattern roles
+fibonacci_strategy : «interface»
+naive_strategy : «strategy»
+top_down_memo_strategy : «strategy»
+bottom_up_tabulation_strategy : «strategy»
+iterative_o1_strategy : «strategy»
+fast_doubling_strategy : «strategy»
+fibonacci : «context»
+StrategyFactory : «factory»
+ContextFactory : «factory»
+Client : «client»
+
+note right of fibonacci_strategy
+Defines a stable algorithm interface:
+  long long compute(int n)
+Implementations should:
+  - throw std::invalid_argument if n < 0
+  - throw std::overflow_error if n > 92
+end note
+
+note bottom of top_down_memo_strategy
+Top-down DP (memoization):
+- Uses std::vector<long long> memo(n+1, -1)
+- Prefer bounds-safe memo.at(i)
+- O(n) time, O(n) space + recursion depth
+end note
+
+note bottom of bottom_up_tabulation_strategy
+Bottom-up DP (tabulation):
+- dp.at(0)=0, dp.at(1)=1; fill up to n
+- O(n) time, O(n) space
+- Prefer dp.at(i) for bounds safety
+end note
+
+note bottom of iterative_o1_strategy
+Iterative rolling variables:
+- Keep only last two values
+- O(n) time, O(1) space
+end note
+
+note bottom of fast_doubling_strategy
+Fast doubling identities:
+- Returns {F(n), F(n+1)} recursively
+- O(log n) time, O(log n) stack
+end note
+
+note right of fibonacci
+Context delegates to strategy_->compute(n)
+Provides setStrategy(...) to swap at runtime
+end note
+
+note right of StrategyFactory
+Maps a string key ("naive", "memo",
+"tab", "iter", "fast") to a concrete
+strategy instance.
+end note
+
+note right of ContextFactory
+Builds a fully configured fibonacci
+context (uses StrategyFactory under the hood).
+end note
+
+note right of Client
+Examples:
+- Reads key from CLI/config
+- Gets context via ContextFactory
+- Calls fib.compute(n)
+end note
+
+@enduml
