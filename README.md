@@ -51,7 +51,25 @@ This assignment consists of the following tasks:
 * Task 4: Implement an iterative strategy (O(1))
 * Task 5: Implement a fast doubling strategy (O(log n))
 
-Some motivational line to get them excited about the assignment.
+Once accomplished, you will have contributed to a large program built on sound engineering design principles. The
+following class diagram shows the classes involved.
+
+![hw03](img/hw03.png)
+
+**Figure 1**: Design Patterns in play for homework 3.
+
+In this assignment, you'll be implementing five different strategies for computing the nth number of the Fibonacci
+sequence.
+
+Below are generalizations of the _Strategy_ pattern employed in this application.
+
+![strat-pattern-class-dia](img/strategy-pattern-class-dia.png)
+
+**Figure 2**: Generalized Class Diagram for the Strategy Pattern.
+
+![strat-pattern-seq-dia](img/strategy-pattern-seq-dia.png)
+
+**Figure 3**: Generalized Sequence Diagram for the Strategy Pattern.
 
 ### Task 1: Implement a naive strategy
 
