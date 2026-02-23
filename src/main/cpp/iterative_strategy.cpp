@@ -18,9 +18,6 @@
 namespace csc232::hw03
 {
     // TODO: Task 4 - Implement me
-    auto iterative_strategy::compute( const int num ) const -> big_number
-    {
-        return 0;
-    }
+    auto iterative_strategy::compute( const int num ) const -> big_number { return 0; }
 } // hw03
 // csc232

@@ -17,9 +17,6 @@
 namespace csc232::hw03
 {
     // TODO: Task 1 - Implement me
-    auto naive_strategy::compute( const int num ) const -> big_number
-    {
-       return 0;
-    }
+    auto naive_strategy::compute( const int num ) const -> big_number { return 0; }
 } // hw03
 // csc232
