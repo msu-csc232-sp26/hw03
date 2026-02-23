@@ -22,9 +22,6 @@ namespace csc232::hw03
         return 0; // Stubbed implementation
     }
 
-    auto top_down_memo_strategy::compute( const int num ) const -> big_number
-    {
-        return 0;
-    }
+    auto top_down_memo_strategy::compute( const int num ) const -> big_number { return 0; }
 } // hw03
 // csc232

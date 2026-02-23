@@ -1,8 +1,4 @@
 @startuml
-' ==========================================================
-'                   SEQUENCE DIAGRAM (Runtime)
-' ==========================================================
-newpage
 
 ' You can render both diagrams from one file.
 ' The sequence shows how Context delegates to Strategy at runtime.

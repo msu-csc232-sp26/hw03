@@ -23,11 +23,7 @@ namespace csc232::hw03
         return std::pair{ number, number };
     }
 
-
-    auto fast_doubling_strategy::compute( const int num ) const -> big_number
-    {
-        return fib_pair( num ).first;
-    }
+    auto fast_doubling_strategy::compute( const int num ) const -> big_number { return fib_pair( num ).first; }
 
 } // hw03
 // csc232
