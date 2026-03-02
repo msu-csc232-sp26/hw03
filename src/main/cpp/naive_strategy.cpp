@@ -3,7 +3,7 @@
  * @brief   Naive strategy implementation.
  *
  * @authors James R. Daehn <jdaehn@missouristate.edu>
- *          // TODO: Add your name using the above format
+ *          Prajjwol B. Rana <prajjwol4062@missouristate.edu>
  * @version 1.0.0
  * @date    2026-02-22
  *
