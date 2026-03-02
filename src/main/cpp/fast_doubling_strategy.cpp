@@ -17,13 +17,39 @@
 
 namespace csc232::hw03
 {
-    // TODO: Task 5 - Implement me (both member functions need an updated implementation)
-    auto fast_doubling_strategy::fib_pair( const big_number number ) -> std::pair<big_number, big_number>
+    namespace csc232::hw03
+{
+    auto fast_doubling_strategy::fib_pair(
+        const big_number number
+    ) -> std::pair<big_number, big_number>
     {
-        return std::pair{ number, number };
+        if (number == 0)
+            return {0, 1};
+
+        auto [a, b] = fib_pair(number / 2);
+
+        big_number c = a * (2 * b - a);      // F(2k)
+        big_number d = a * a + b * b;        // F(2k + 1)
+
+        if (number % 2 == 0)
+            return {c, d};
+        else
+            return {d, c + d};
     }
 
-    auto fast_doubling_strategy::compute( const int num ) const -> big_number { return fib_pair( num ).first; }
+    auto fast_doubling_strategy::compute(
+        const int num
+    ) const -> big_number
+    {
+        if (num < 0)
+            throw std::invalid_argument("Negative input not allowed.");
+
+        if (num > 92)
+            throw std::overflow_error("Result would overflow.");
+
+        return fib_pair(num).first;
+    }
+}
 
 } // hw03
 // csc232
